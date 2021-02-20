@@ -3,6 +3,20 @@ import bodyParser from 'body-parser';
 
 // "npx nodemon --exec npx babel-node src/server.js" to restart
 
+// db.articles.insert([{
+//     ... name: 'learn-react',
+//     ... upvotes: 0,
+//     ... comments: [],
+//     ... }, {
+//     ... name: 'learn-node',
+//     ... upvotes: 0,
+//     ... comments: [],
+//     ... }, {
+//     ... name: 'my-thoughts-on-resumes',
+//     ... upvotes:0,
+//     ... comments: [],
+//     ... }])
+
 const articlesInfo = {
     'learn-react': {
         upvotes: 0,
@@ -15,7 +29,7 @@ const articlesInfo = {
     'my-thoughts-on-resumes': {
         upvotes: 0,
         comments: [],
-    }
+    },
 }
 
 const app = express();
