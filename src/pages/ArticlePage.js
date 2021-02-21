@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ArticlesList from '../components/ArticlesList';
 import articleContent from './article-content';
+import CommentsList from '../components/CommentsList';
+import UpvotesSection from '../components/UpvotesSection';
 import NotFoundPage from './NotFoundPage';
 
 const ArticlePage = ({ match }) => {
@@ -11,7 +13,13 @@ const ArticlePage = ({ match }) => {
     const [articleInfo, setArticleInfo] = useState({ upvotes: 0, comments: [] });
 
     useEffect(() => {
-        setArticleInfo({ upvotes: Math.ceil(Math.random() * 10) });
+        const fetchData = async () => {
+            const result = await fetch(`/api/articles/${name}`);
+            const body = await result.json();
+            console.log(body);
+            setArticleInfo(body);
+        }
+        fetchData();
     }, [name]);
 
     if (!article) return <NotFoundPage />
@@ -21,10 +29,11 @@ const ArticlePage = ({ match }) => {
     return (
         <React.Fragment>
             <h1>{article.title}</h1>
-            <p>This post has been upvotes {articleInfo.upvotes} times.</p>
+            <UpvotesSection articleName={name} upvotes={articleInfo.upvotes} setArticleInfo={setArticleInfo} />
             {article.content.map((paragraph, key) => (
                 <p key={key}>{paragraph}</p>
             ))}
+            <CommentsList comments={articleInfo.comments} />
             <h2>Other Articles:</h2>
             <ArticlesList articles={otherArticles} />
         </React.Fragment>
