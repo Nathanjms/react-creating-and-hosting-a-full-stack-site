@@ -4,6 +4,7 @@ import articleContent from './article-content';
 import CommentsList from '../components/CommentsList';
 import UpvotesSection from '../components/UpvotesSection';
 import NotFoundPage from './NotFoundPage';
+import AddCommentForm from '../components/AddCommentForm';
 
 const ArticlePage = ({ match }) => {
 
@@ -34,6 +35,7 @@ const ArticlePage = ({ match }) => {
                 <p key={key}>{paragraph}</p>
             ))}
             <CommentsList comments={articleInfo.comments} />
+            <AddCommentForm articleName={name} setArticleInfo={setArticleInfo} />
             <h2>Other Articles:</h2>
             <ArticlesList articles={otherArticles} />
         </React.Fragment>
